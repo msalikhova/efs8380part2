@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,10 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0cfd=(-c-x5k@)(f=-m#pjx$unrtv4hz02w)b&5l!n8_^=d6+r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
-
+DEBUG = True
 
 # Application definition
 
@@ -39,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'portfolio',
     'crispy_forms',
+    'mathfilters',
+    'django.contrib.humanize',
+
 ]
 
 MIDDLEWARE = [
@@ -80,6 +86,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER': 'phrgrsehjwtdzw',
+        'PASSWORD': 'ac4b6cf35f83f10377dedb745ab277b3eb972321d55fec496d2ca82c4d1fa26b',
+        'HOST': 'ec2-174-129-229-106.compute-1.amazonaws.com',
+        'PORT': '5432',
+
     }
 }
 
@@ -119,8 +130,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 STATIC_URL = '/static/'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 EMAIL_HOST = 'smtp.mailtrap.io'
@@ -129,4 +147,22 @@ EMAIL_HOST_PASSWORD = '181db942ad2929'
 EMAIL_PORT = 2525
 #EMAIL_USE_TLS = True
 
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+
 LOGIN_REDIRECT_URL = '/home'
+
+
+# Update database configuration with $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+DATABASES['default'] = dj_database_url.config()
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
