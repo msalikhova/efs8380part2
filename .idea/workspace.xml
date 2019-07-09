@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd26ae88-17cd-4be5-87c7-536986c9889d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/efs/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/efs/wsgi.py" afterDir="false" />
+    <list default="true" id="fd26ae88-17cd-4be5-87c7-536986c9889d" name="Default Changelist" comment="changes for Heroku">
+      <change beforePath="$PROJECT_DIR$/../efs" beforeDir="false" afterPath="$PROJECT_DIR$/../efs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$" beforeDir="false" afterPath="$PROJECT_DIR$" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue-npm/vue-proj" beforeDir="false" afterPath="$PROJECT_DIR$/../vue-npm/vue-proj" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +39,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/efs/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
+            <state relative-caret-position="136">
               <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
               <folding>
                 <element signature="e#219#228#0" expanded="true" />
@@ -168,18 +171,25 @@
       <workItem from="1562544453179" duration="739000" />
       <workItem from="1562545550134" duration="13577000" />
       <workItem from="1562701037319" duration="3187000" />
-      <workItem from="1562708533180" duration="5544000" />
+      <workItem from="1562708533180" duration="7113000" />
     </task>
+    <task id="LOCAL-00001" summary="changes for Heroku">
+      <created>1562715924674</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1562715924674</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23047000" />
+    <option name="totallyTimeSpent" value="24616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1292" height="692" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26213592" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26213592" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -192,8 +202,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.57978725" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.5008091" side_tool="true" visible="true" weight="0.2819149" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49919093" visible="true" weight="0.2819149" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -227,6 +237,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="changes for Heroku" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes for Heroku" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/admin/sites.py">
@@ -403,7 +417,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/efs/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
+        <state relative-caret-position="136">
           <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
           <folding>
             <element signature="e#219#228#0" expanded="true" />
