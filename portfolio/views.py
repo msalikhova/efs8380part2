@@ -5,19 +5,26 @@ from .forms import *
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.db.models import Sum
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import CustomerSerializer
 
 
 now = timezone.now()
+
+
 def home(request):
    return render(request, 'portfolio/home.html',
                  {'portfolio': home})
+
 
 @login_required
 def customer_list(request):
     customer = Customer.objects.filter(created_date__lte=timezone.now())
     return render(request, 'portfolio/customer_list.html',
                  {'customers': customer})
+
 
 @login_required
 def customer_edit(request, pk):
@@ -36,6 +43,7 @@ def customer_edit(request, pk):
         # edit
        form = CustomerForm(instance=customer)
    return render(request, 'portfolio/customer_edit.html', {'form': form})
+
 
 @login_required
 def customer_delete(request, pk):
@@ -81,7 +89,7 @@ def stock_edit(request, pk):
             # stock.customer = stock.id
             stock.updated_date = timezone.now()
             stock.save()
-            stocks = Stock.objects.filter(purchase_date__lte=timezone.now())
+            stocks = Stock.objects.filter()
 
             return render(request, 'portfolio/stock_list.html', {'stocks': stocks})
     else:
@@ -96,10 +104,12 @@ def stock_delete(request,pk):
     stock.delete()
     return redirect('portfolio:stock_list')
 
+
 @login_required
 def investment_list(request):
    investments = Investment.objects.filter
    return render(request, 'portfolio/investment_list.html', {'investments': investments})
+
 
 @login_required
 def investment_new(request):
@@ -117,28 +127,31 @@ def investment_new(request):
 
    return render(request, 'portfolio/investment_new.html', {'form': form})
 
+
 @login_required
 def investment_edit(request, pk):
-   investment = get_object_or_404(Stock, pk=pk)
+   investment = get_object_or_404(Investment, pk=pk)
    if request.method == "POST":
-       form = InvestmentForm(request.POST, instance=stock)
+       form = InvestmentForm(request.POST, instance=investment)
        if form.is_valid():
            investment = form.save()
-           # stock.customer = stock.id
+           # investment.customer = investment.id
            investment.updated_date = timezone.now()
            investment.save()
-           investments = Investment.objects.filter
+           investments = Investment.objects.filter(acquired_date__lte=timezone.now())
            return render(request, 'portfolio/investment_list.html', {'investments': investments})
    else:
-
+       # print("else")
        form = InvestmentForm(instance=investment)
    return render(request, 'portfolio/investment_edit.html', {'form': form})
+
 
 @login_required
 def investment_delete(request, pk):
    investment = get_object_or_404(Investment, pk=pk)
    investment.delete()
    return redirect('portfolio:investment_list')
+
 
 @login_required
 def portfolio(request, pk):
@@ -150,17 +163,19 @@ def portfolio(request, pk):
     sum_recent_value = Investment.objects.filter(customer=pk).aggregate(Sum('recent_value'))
 
     # Initialize the value of the stocks
+    sum_current_stocks_value = 0
     sum_of_initial_stock_value = 0
 
     # Loop through each stock and add the value to the total
     for stock in stocks:
-        print(stock)
+        sum_current_stocks_value += stock.current_stock_value()
         sum_of_initial_stock_value += stock.initial_stock_value()
 
     return render(request, 'portfolio/portfolio.html', {'customers': customers, 'investments': investments,
                                                         'stocks': stocks,
                                                         'sum_acquired_value': sum_acquired_value,
                                                         'sum_recent_value': sum_recent_value,
+                                                        'sum_current_stocks_value': sum_current_stocks_value,
                                                         'sum_of_initial_stock_value': sum_of_initial_stock_value})
 
 
@@ -173,12 +188,22 @@ def password_reset_confirm(request):
     return render(request, 'registration/password_reset_confirm.html',
     {'registration': password_reset_confirm})
 
+
 def password_reset_email(request):
     return render(request, 'registration/password_reset_email.html',
     {'registration': password_reset_email})
+
 
 def password_reset_done(request):
     return render(request, 'registration/password_reset_complete.html',
     {'registration': password_reset_done})
 
 
+# List at the end of the views.py
+# Lists all customers
+class CustomerList(APIView):
+
+    def get(self,request):
+        customers_json = Customer.objects.all()
+        serializer = CustomerSerializer(customers_json, many=True)
+        return Response(serializer.data)

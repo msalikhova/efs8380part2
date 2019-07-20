@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'portfolio',
     'crispy_forms',
+    'rest_framework',
     'mathfilters',
     'django.contrib.humanize',
 
@@ -86,10 +87,10 @@ WSGI_APPLICATION = 'efs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd5se9agq26c7lp',
-        'USER': 'phrgrsehjwtdzw',
-        'PASSWORD': 'ac4b6cf35f83f10377dedb745ab277b3eb972321d55fec496d2ca82c4d1fa26b',
-        'HOST': 'ec2-174-129-229-106.compute-1.amazonaws.com',
+        'NAME': 'damcl1ug5veem5',
+        'USER': 'lfzlzzjvtjypdh',
+        'PASSWORD': '695cc47b7651ef04166530608485534094134b193c449e8086a92fc552a2c452',
+        'HOST': 'ec2-107-21-216-112.compute-1.amazonaws.com',
         'PORT': '5432',
 
     }
